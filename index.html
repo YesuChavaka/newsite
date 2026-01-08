@@ -40,6 +40,7 @@
         body {
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         /* HEADER */
@@ -56,6 +57,7 @@
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
             z-index: 1000;
             transition: var(--transition);
+            max-width: 100vw; /* Ensure header doesn't exceed viewport width */
         }
 
         .header.scrolled {
@@ -66,6 +68,7 @@
         .logo-area {
             display: flex;
             align-items: center;
+            flex-shrink: 0; /* Prevent logo from shrinking */
         }
 
         .logo {
@@ -121,6 +124,12 @@
         }
 
         /* SOCIAL ICONS */
+        .header-social {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0; /* Prevent social icons from shrinking */
+        }
+
         .header-social a {
             color: var(--text-color);
             margin-left: 15px;
@@ -139,6 +148,8 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--dark-color);
+            padding: 5px;
+            flex-shrink: 0; /* Prevent menu button from shrinking */
         }
 
         /* SECTIONS */
@@ -411,12 +422,18 @@
         /* TESTIMONIALS */
         .testimonials {
             background: var(--light-color);
+            overflow: hidden;
         }
 
         .testimonial-container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            transition: transform 0.5s ease;
         }
 
         .testimonial {
@@ -424,7 +441,8 @@
             padding: 40px;
             border-radius: 15px;
             box-shadow: var(--card-shadow);
-            margin-bottom: 30px;
+            min-width: 100%;
+            margin: 0 15px;
         }
 
         .testimonial-text {
@@ -468,10 +486,36 @@
             color: var(--text-color);
         }
 
-        .testimonial-dots {
+        .testimonial-controls {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .testimonial-arrow {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-arrow:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            gap: 8px;
         }
 
         .dot {
@@ -479,7 +523,6 @@
             height: 12px;
             border-radius: 50%;
             background: #ddd;
-            margin: 0 5px;
             cursor: pointer;
             transition: var(--transition);
         }
@@ -684,7 +727,7 @@
 
         @media (max-width: 768px) {
             .header {
-                padding: 15px 5%;
+                padding: 15px 20px; /* Increased padding to ensure menu button is visible */
             }
 
             nav {
@@ -720,7 +763,7 @@
             }
 
             .section {
-                padding: 80px 5%;
+                padding: 80px 20px;
             }
 
             .hero h1 {
@@ -747,6 +790,10 @@
 
             .footer-content {
                 flex-direction: column;
+            }
+
+            .testimonial {
+                padding: 30px 20px;
             }
         }
     </style>
@@ -902,23 +949,87 @@
     </p>
     
     <div class="testimonial-container">
-        <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
-            <div class="testimonial-text">
-                Working with NexaDigital has been a game-changer for our business. Their expertise in digital marketing helped us increase our online visibility by 200% in just six months.
+        <div class="testimonial-slider" id="testimonialSlider">
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    Working with NexaDigital has been a game-changer for our business. Their expertise in digital marketing helped us increase our online visibility by 200% in just six months.
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://picsum.photos/seed/person1/60/60.jpg" alt="Client" class="author-image">
+                    <div class="author-info">
+                        <h4>Sarah Johnson</h4>
+                        <p>CEO, TechStart Inc.</p>
+                    </div>
+                </div>
             </div>
-            <div class="testimonial-author">
-                <img src="https://picsum.photos/seed/person1/60/60.jpg" alt="Client" class="author-image">
-                <div class="author-info">
-                    <h4>Sarah Johnson</h4>
-                    <p>CEO, TechStart Inc.</p>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    The web development team at NexaDigital created a stunning website for our company. The attention to detail and user experience design exceeded our expectations.
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://picsum.photos/seed/person2/60/60.jpg" alt="Client" class="author-image">
+                    <div class="author-info">
+                        <h4>Michael Chen</h4>
+                        <p>Founder, InnovateTech</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    NexaDigital's SEO strategies transformed our online presence. We're now ranking on the first page for our key terms and seeing a significant increase in organic traffic.
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://picsum.photos/seed/person3/60/60.jpg" alt="Client" class="author-image">
+                    <div class="author-info">
+                        <h4>Emily Rodriguez</h4>
+                        <p>Marketing Director, GrowthCo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    The team's professionalism and commitment to delivering results is unmatched. They've become an essential partner in our digital transformation journey.
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://picsum.photos/seed/person4/60/60.jpg" alt="Client" class="author-image">
+                    <div class="author-info">
+                        <h4>David Thompson</h4>
+                        <p>CTO, Future Systems</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial">
+                <div class="testimonial-text">
+                    We've tried multiple digital agencies, but NexaDigital is the only one that delivered measurable ROI. Their data-driven approach really works.
+                </div>
+                <div class="testimonial-author">
+                    <img src="https://picsum.photos/seed/person5/60/60.jpg" alt="Client" class="author-image">
+                    <div class="author-info">
+                        <h4>Lisa Anderson</h4>
+                        <p>President, Retail Solutions</p>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="testimonial-dots">
-            <span class="dot active" onclick="currentSlide(1)"></span>
-            <span class="dot" onclick="currentSlide(2)"></span>
-            <span class="dot" onclick="currentSlide(3)"></span>
+        <div class="testimonial-controls">
+            <div class="testimonial-arrow" onclick="moveSlider(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <div class="testimonial-dots">
+                <span class="dot active" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span>
+            </div>
+            <div class="testimonial-arrow" onclick="moveSlider(1)">
+                <i class="fas fa-chevron-right"></i>
+            </div>
         </div>
     </div>
 </section>
@@ -1095,19 +1206,62 @@
     statsObserver.observe(statsSection);
 
     // Testimonial slider
-    let slideIndex = 1;
-    
-    function currentSlide(n) {
-        showSlide(slideIndex = n);
-    }
-    
-    function showSlide(n) {
-        const dots = document.querySelectorAll('.dot');
-        if (n > dots.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = dots.length }
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+    const dots = document.querySelectorAll('.dot');
+    const slider = document.getElementById('testimonialSlider');
+    const totalTestimonials = testimonials.length;
+
+    function showTestimonial(index) {
+        if (index < 0) {
+            currentTestimonial = totalTestimonials - 1;
+        } else if (index >= totalTestimonials) {
+            currentTestimonial = 0;
+        } else {
+            currentTestimonial = index;
+        }
         
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[slideIndex - 1].classList.add('active');
+        const offset = -currentTestimonial * 100;
+        slider.style.transform = `translateX(${offset}%)`;
+        
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentTestimonial);
+        });
+    }
+
+    function moveSlider(direction) {
+        showTestimonial(currentTestimonial + direction);
+    }
+
+    function currentSlide(n) {
+        showTestimonial(n - 1);
+    }
+
+    // Auto-rotate testimonials
+    setInterval(() => {
+        moveSlider(1);
+    }, 5000);
+
+    // Touch/swipe support for testimonials
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slider.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        if (touchEndX < touchStartX - 50) {
+            moveSlider(1); // Swipe left
+        }
+        if (touchEndX > touchStartX + 50) {
+            moveSlider(-1); // Swipe right
+        }
     }
 
     // Form submission
