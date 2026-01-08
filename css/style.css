@@ -79,6 +79,7 @@ body {
     box-shadow: var(--shadow-sm);
     z-index: 1000;
     transition: all 0.3s ease;
+    height: 60px; /* Add fixed height */
 }
 
 .header.scrolled {
@@ -970,12 +971,13 @@ footer {
 
 @media (max-width: 768px) {
     .header {
-        padding: 15px 20px;
+        padding: 12px 20px;
+        height: 60px; /* Ensure consistent height on mobile */
     }
 
     .menu {
         position: fixed;
-        top: 70px;
+        top: 60px; /* Reduced from 70px to match header height */
         left: 0;
         width: 100%;
         background-color: white;
@@ -987,6 +989,8 @@ footer {
         visibility: hidden;
         transition: all 0.3s ease;
         z-index: 999;
+        max-height: calc(100vh - 60px); /* Ensure it doesn't exceed viewport height */
+        overflow-y: auto; /* Add scrolling if menu is too long */
     }
 
     .menu.active {
