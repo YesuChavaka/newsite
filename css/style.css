@@ -104,9 +104,9 @@ body {
 }
 
 /* Navigation */
-nav {
-    transition: all 0.3s ease;
-}
+ nav {
+        position: relative;
+    }
 
 .menu {
     list-style: none;
@@ -122,7 +122,9 @@ nav {
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
-    font-size: 16px;
+    font-size: 18px; /* Larger font size for better visibility */
+    padding: 10px 0; /* More padding for easier tapping */
+    display: block; /* Full width for easier tapping */
     transition: color 0.3s ease;
     position: relative;
 }
@@ -177,6 +179,7 @@ nav {
     font-size: 24px;
     cursor: pointer;
     color: var(--text-dark);
+    z-index: 1001; /* Ensure it's above other elements */
 }
 
 /* Hero Section */
@@ -984,11 +987,11 @@ footer {
         flex-direction: column;
         padding: 20px;
         box-shadow: var(--shadow-md);
-        transform: translateY(-100%);
+        transform: translateY(-100vh); /* Changed from -100% to -100vh */
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        z-index: 999;
+        z-index: 1000; /* High z-index to ensure visibility */
         max-height: calc(100vh - 60px); /* Ensure it doesn't exceed viewport height */
         overflow-y: auto; /* Add scrolling if menu is too long */
     }

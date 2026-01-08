@@ -17,11 +17,10 @@ window.addEventListener('load', function() {
 
 // Toggle Mobile Menu
 function toggleMenu() {
-    const navbar = document.getElementById("navbar");
-    navbar.classList.toggle("active");
+    document.getElementById("navbar").classList.toggle("active");
     
-    // Toggle body scroll when menu is open
-    if (navbar.classList.contains("active")) {
+    // Optional: Prevent body scroll when menu is open
+    if (document.getElementById("navbar").classList.contains("active")) {
         document.body.style.overflow = "hidden";
     } else {
         document.body.style.overflow = "auto";
